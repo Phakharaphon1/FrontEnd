@@ -20,7 +20,6 @@ app.use(express.static(__dirname + '/public'));
 
 app.get("/", async (req, res) => {
     try {
-        console.log("Start");
         const response = await axios.get(base_url + '/books');
         res.render("books", { books: response.data });
     } catch (err) {
@@ -60,8 +59,8 @@ app.get("/update/:id", async (req, res) => {
         base_url + '/books/' + req.params.id);
         res.render("update", { book: response.data });
     } catch (err) {
-            console.error(err);
-            res.status(500).send('Error');
+        console.error(err);
+        res.status(500).send('Error');
     }
 });
 
@@ -78,7 +77,7 @@ app.post("/update/:id", async (req, res) => {
 
 app.get("/delete/:id", async (req, res) => {
     try {
-        await axios.delete(base_url + '/books/' + req.params.id, data);
+        await axios.delete(base_url + '/books/' + req.params.id);
             res.redirect("/");
     } catch (err) {
         console.error(err);
